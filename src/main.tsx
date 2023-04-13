@@ -9,19 +9,19 @@ import "./index.css";
 import Index from "./pages/Index";
 import Recipe from "./pages/Recipe";
 
-const routes : RouteObject[] = [
+const routes: RouteObject[] = [
   {
-  path: "/recipe/:slug",
-  element: <Recipe />,
-  }
-] 
+    path: "/recipe/:slug",
+    element: <Recipe />,
+  },
+];
 
 const router = createBrowserRouter([
   ...routes,
-  { 
-    path: '*',
-    element: <Index />
-  }
+  {
+    path: "*",
+    element: <Index />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
