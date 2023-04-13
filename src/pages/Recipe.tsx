@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import StepNode, { Step } from '../StepNode'
 import load from '../TreeBuilder'
+import { Link } from 'react-router-dom'
 
 function Recipe() {
     const { slug } = useParams()
@@ -30,16 +31,17 @@ function Recipe() {
 
 
     return (<>
-    <button onClick={() => { setCompactMode(!isCompactMode)}}></button>
-        <h4>Ingredients</h4>
-        <ol start={0}>
+    <Link to="/"><button>Home</button></Link>
+    <button onClick={() => { setCompactMode(!isCompactMode)}}>Compact Mode</button>
+        <h4 className='font-bold text-4xl mt-6 mb-2'>Ingredients</h4>
+        <ol start={0} className='list-decimal list-inside'>
         {
             ingredients.map((ingredient) => {
                 return <li key={ingredient}>{ingredient}</li>
             })
         }
         </ol>
-        <h4>Steps</h4>
+        <h4 className='font-bold text-4xl mt-12 mb-2'>Steps</h4>
         <ol>
             {steps?.render(ingredients, isCompactMode)}
         </ol>

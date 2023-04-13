@@ -42,9 +42,9 @@ export default class StepNode  {
 
       return (
       <>
-      {this.depth !== 0  && <li key={this.data} className={this.depth === 1 ? 'font-bold' : ''}>{isCompactMode ? compactData : this.data}</li>}
+      {this.depth !== 0  && <li key={this.data} className={`indent-${this.depth*2} ${this.depth === 1 ? 'font-bold' : ''}`}>{isCompactMode ? compactData : this.data}</li>}
       {this.children.length !== 0
-      && <ol start={0}>
+      && <ol className="list-decimal list-inside" start={0}>
         {this.children.map((child) =>  child.render(ingredients, isCompactMode))}  
       </ol>
       }
