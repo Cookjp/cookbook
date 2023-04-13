@@ -1,0 +1,38 @@
+{ "ingredients": [
+    "pasta", "pecorino", "parmesan", "eggs", "very cold sparkling water", "white wine", "guanciale / pancetta"
+],
+"steps": [
+    {
+        "label": "Fry guanciale / pancetta",
+        "skippable": false,
+        "children" : [
+            { "label": "Until very brown" }
+        ]
+    },
+    {
+        "label": "Deglaze with white wine",
+        "skippable": true,
+        "children" : [
+            { "label": "skip if meat is good" }
+        ]
+    },
+    {
+        "label": "Add very cold sparkling water",
+        "skippable": false
+    },
+    {
+        "label": "Add eggs, pecorino, parmesan",
+        "skippable": false,
+        "children": [
+            { "label": "mix well" }
+        ]
+    },
+    {
+        "label": "Add pasta",
+        "children": [
+            { "label": "low heat and keep everything moving until squishy sauce" }
+        ]
+    }
+
+]
+}
