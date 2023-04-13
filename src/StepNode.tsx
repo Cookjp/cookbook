@@ -44,7 +44,7 @@ export default class StepNode {
         {this.depth !== 0 && (
           <li
             key={this.data}
-            className={`indent-${this.depth * 2} ${
+            className={`indent-${this.depth} ${
               this.depth === 1 ? "font-bold" : ""
             }`}
           >
