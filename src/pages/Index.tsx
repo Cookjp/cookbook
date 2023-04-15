@@ -24,7 +24,7 @@ const Index = () => {
     <>
       {recipes.map((recipe) => (
         <Link key={recipe} to={`/recipe/${recipe}`}>
-          <button>{recipe}</button>
+          <button>{recipe.replaceAll("-", " ")}</button>
         </Link>
       ))}
     </>
