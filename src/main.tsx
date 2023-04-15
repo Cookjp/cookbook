@@ -5,7 +5,7 @@ import {
   RouteObject,
   RouterProvider,
 } from "react-router-dom";
-import "./index.css";
+import "./index.scss";
 import Index from "./pages/Index";
 import Recipe from "./pages/Recipe";
 

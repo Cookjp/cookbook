@@ -44,7 +44,7 @@ function Recipe() {
         Compact Mode
       </button>
       <h4 className="font-bold text-4xl mt-6 mb-2">Ingredients</h4>
-      <ol start={0} className="list-decimal list-inside">
+      <ol start={0} className="list-decimal list-outside">
         {ingredients.map((ingredient) => {
           return <li key={ingredient}>{ingredient}</li>;
         })}
