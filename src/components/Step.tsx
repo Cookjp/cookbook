@@ -21,25 +21,25 @@ interface Props {
     const hasChildren = node.children.length !== 0 
 
     return (
-    <div className="flex">
-     {!isRoot && <button className="dropdown" onClick={() => setShow(!show)}><div className={`${show ? 'rotate-90' : ''}`}>{">"}</div></button> }
-      <div className={`block ${show ? '' : 'invisible h-0'}`}>
+    <div className={`flex justify-between ${!isRoot && 'accordion'}`}>
+      <div className={`block w-full`}>
         {!isRoot && (
                 <li
                     key={node.data}
-                    className={`li-indent-${node.depth} ${node.depth === 1 ? "font-bold" : ""}`}
+                    className={`li-indent-${node.depth} mr-8 ${node.depth === 1 ? "font-bold" : ""}`}
                 >
                     {isCompactMode ? compactData : node.data}
                 </li>
         )}
         {hasChildren && (
-          <ol className="list-decimal list-inside" start={1}>
+          <ol className={`list-decimal list-inside ${show ? '' : 'opacity-0 h-0'}`} start={1}>
             {node.children.map((child) =>
             <Step key={child.data} node={child} ingredients={ingredients} isCompactMode={isCompactMode}/>
             )}
           </ol>
         )}
       </div>
+      {!isRoot && hasChildren && <button className="dropdown bg-grey-200 text-[#646cff]" onClick={() => setShow(!show)}><span>{show ? "-" : "+"}</span></button> }
       </div>
     );
   }

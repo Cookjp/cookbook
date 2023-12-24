@@ -51,10 +51,12 @@ function Recipe() {
   
   return (
     <>
-      <div className="flex gap-4">
+      <div className="mb-4">
         <Link to="/">
-          <button className="nav">Home</button>
+          <button className="nav">{`< Home`}</button>
         </Link>
+      </div>
+      <div className="flex gap-4">
         <button
           className="nav"
           onClick={() => {
