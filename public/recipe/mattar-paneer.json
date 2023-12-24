@@ -1,0 +1,46 @@
+{
+  "ingredients": [
+    "onions",
+    "vegetable oil",
+    "tomato paste",
+    "chopped tomatoes",
+    "sugar",
+    "garam masala",
+    "cumin",
+    "frozen peas",
+    "paneer",
+    "double cream",
+    "coriander"
+  ],
+  "steps": [
+    {
+      "label": "Caramelise onions",
+      "skippable": false
+    },
+    {
+      "label": "Added chopped tomatoes",
+      "skippable": true
+    },
+    {
+      "label": "Add salt, tomato paste, sugar, garam masala, cumin.",
+      "skippable": false,
+      "children": [{"label": "10 minutes"}]
+
+    },
+    {
+      "label": "Add frozen peas and 120ml water.",
+      "skippable": false,
+      "children": [{"label": "5 minutes"}]
+    },
+    {
+      "label": "Add paneer cubes.",
+      "skippable": false,
+      "children": [{"label": "10 minutes"}]
+    },
+    {
+      "label": "Add cream.",
+      "skippable": false,
+      "children": [{"label": "simmer then take off heat"}]
+    }
+  ]
+}
