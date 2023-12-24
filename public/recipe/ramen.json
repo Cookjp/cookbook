@@ -27,7 +27,7 @@
     },
     {
       "label": "Prep some toppings",
-      "children": [ {"label": "boil egg for 6 minutes"}, { "label": "fry some mushrooms (See [Garlic Mushrooms](/recipe/garlic-mushrooms)"}]
+      "children": [ {"label": "boil egg for 6 minutes"}, { "label": "fry mushrooms (See [Garlic Mushrooms](/recipe/garlic-mushrooms)"}]
     },
     {
       "label": "Sear chicken thighs",

@@ -3,10 +3,11 @@
 // set compact mode where ingredients show as their numbers ✅
 // add index page ✅
 // add back button ✅
+// deploy ✅
 // implement something to do with skippable steps and ingredients like step 1 in carbonara
 // add other recipes
 // make it look pretty
-// handle linkes e.g. garlic mushrooms in ramen
+// handle links e.g. garlic mushrooms in ramen
 // add some sort of search based on ingredients (what's in my fridge sort of thing)
 // Flow feature? I.e. circles for prep. diamond for cooking. can things happen simulatenously? top line is tasks. drop down of items describing ongoing events
 // button to list ingredients next to each step

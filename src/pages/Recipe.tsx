@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import StepNode, { Step } from "../StepNode";
+import StepNode from "../StepNode";
 import load from "../TreeBuilder";
 import { Link } from "react-router-dom";
+import { Step } from "../components/Step";
 
 function Recipe() {
   const { slug } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState<StepNode>();
   const [isCompactMode, setCompactMode] = useState(false);
-  let loaded = false;
   if (!slug) return null;
 
   useEffect(() => {
@@ -27,7 +27,6 @@ function Recipe() {
 
       setIngredients(sorted);
 
-      loaded = true;
     });
   }, []);
 
@@ -35,9 +34,10 @@ function Recipe() {
     <>
       <div className="flex gap-4">
         <Link to="/">
-          <button>Home</button>
+          <button className="nav">Home</button>
         </Link>
         <button
+          className="nav"
           onClick={() => {
             setCompactMode(!isCompactMode);
           }}
@@ -45,7 +45,8 @@ function Recipe() {
           Compact Mode
         </button>
       </div>
-      <div className="md:flex gap-24 flex-wrap">
+      <div className="md:flex gap-24 flex-nowrap">
+        {/* Ingredeients List */}
         <div className="block">
           <h4 className="font-bold text-4xl mt-6 mb-2">Ingredients</h4>
           <ol start={1} className="list-decimal list-outside ml-4">
@@ -54,9 +55,10 @@ function Recipe() {
             })}
           </ol>
         </div>
+        {/* Recipe steps list */}
         <div className="block">
           <h4 className="font-bold text-4xl mt-12 md:mt-6 mb-2">Steps</h4>
-          <ol className="ml-5">{steps?.render(ingredients, isCompactMode)}</ol>
+          {steps && <div className="ml-5"><Step node={steps} ingredients={ingredients} isCompactMode={isCompactMode}/> </div>}
         </div>
       </div>
     </>

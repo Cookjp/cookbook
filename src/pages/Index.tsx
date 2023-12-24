@@ -24,7 +24,7 @@ const Index = () => {
     <div className="flex gap-4">
       {recipes.map((recipe) => (
         <Link key={recipe} to={`/recipe/${recipe}`}>
-          <button>{recipe.replaceAll("-", " ")}</button>
+          <button className="nav">{recipe.replaceAll("-", " ")}</button>
         </Link>
       ))}
     </div>

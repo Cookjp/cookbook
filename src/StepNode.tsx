@@ -1,10 +1,6 @@
-import React from "react";
+// Tree node used to construct a recipe tree
+// components/Step.tsx can render this 
 
-interface Step {
-  data: string;
-  depth: number;
-}
-// implements Iterable<Step>
 export default class StepNode {
   data: string;
   children: StepNode[];
@@ -15,10 +11,6 @@ export default class StepNode {
     this.depth = depth;
     this.children = [];
   }
-
-  // [Symbol.iterator](): Iterator<Step, any, undefined> {
-  //   throw new Error("Method not implemented.");
-  // }
 
   addChild(node: StepNode) {
     this.children.push(node);
@@ -32,36 +24,4 @@ export default class StepNode {
       .concat(this.children.flatMap((child) => child.traverse()))
       .flatMap((f) => (f ? [f] : [])); // removes nulls and is type safe
   }
-
-  render(ingredients: string[], isCompactMode: boolean) {
-    let compactData = this.data;
-    ingredients.forEach((ingredient: string, idx: number) => {
-      const regexPattern = new RegExp("(?<![a-zA-Z])" + ingredient + "(?![a-zA-Z])", "g");
-      compactData = compactData.replace(regexPattern, `${idx+1}`);
-    });
-
-    return (
-      <>
-        {this.depth !== 0 && (
-          <li
-            key={this.data}
-            className={`li-indent-${this.depth - 1} ${
-              this.depth === 1 ? "font-bold" : ""
-            }`}
-          >
-            {isCompactMode ? compactData : this.data}
-          </li>
-        )}
-        {this.children.length !== 0 && (
-          <ol className="list-decimal list-outside" start={1}>
-            {this.children.map((child) =>
-              child.render(ingredients, isCompactMode)
-            )}
-          </ol>
-        )}
-      </>
-    );
-  }
 }
-
-export type { Step };
