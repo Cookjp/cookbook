@@ -23,7 +23,7 @@ interface Props {
     return (
     <div className="flex">
      {!isRoot && <button className="dropdown" onClick={() => setShow(!show)}><div className={`${show ? 'rotate-90' : ''}`}>{">"}</div></button> }
-      <div className={`block ${show ? '' : 'invisible'}`}>
+      <div className={`block ${show ? '' : 'invisible h-0'}`}>
         {!isRoot && (
                 <li
                     key={node.data}
