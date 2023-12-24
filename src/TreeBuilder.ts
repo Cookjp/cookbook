@@ -6,7 +6,13 @@ async function fetchJsonFile(filePath: string) {
     headers: {
       Accept: "application/json",
     },
-  }).then((response) => response.json());
+  }).then((response) => {
+    if(response.status === 200)  {
+      return response.json()
+    }
+    else return response
+  })
+  .catch(() => { return{status: 400}});
 }
 
 function addChildren(node: StepNode, children: any[], depth: number): void {
@@ -21,10 +27,11 @@ function addChildren(node: StepNode, children: any[], depth: number): void {
 
 async function buildStepTreeFromFile(filename: string) {
   const json = await fetchJsonFile(filename + ".json");
+  const status = json["status"]
   const ingredients = json["ingredients"];
   const rootNode = new StepNode("root", 0);
   addChildren(rootNode, json["steps"], 0);
-  return { ingredients, stepTree: rootNode };
+  return { status, ingredients, stepTree: rootNode };
 }
 
 export default buildStepTreeFromFile;

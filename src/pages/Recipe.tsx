@@ -2,34 +2,53 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import StepNode from "../StepNode";
 import load from "../TreeBuilder";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Step } from "../components/Step";
+import NotFound from "./NotFound";
 
-function Recipe() {
-  const { slug } = useParams();
+
+const useRecipe = (slug :string | undefined) => {
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState<StepNode>();
-  const [isCompactMode, setCompactMode] = useState(false);
-  if (!slug) return null;
+  const [ok, setOK] = useState(true)
 
   useEffect(() => {
+    if(!slug) return 
     load(slug).then((result) => {
+      if(result.status === 404) {
+        setOK(false)
+        return 
+      }
       setSteps(result.stepTree);
 
       const allStepLabels = result.stepTree?.traverse().join(" ");
 
-      const ingredients = result.ingredients.filter((x: string) => {
+      const ingredients = result.ingredients?.filter((x: string) => {
         return allStepLabels.includes(x);
       });
-      const sorted = ingredients.sort((a: string, b: string) => {
+      const sorted = ingredients?.sort((a: string, b: string) => {
         return allStepLabels.indexOf(a) - allStepLabels.indexOf(b);
       });
 
       setIngredients(sorted);
 
     });
-  }, []);
+  }, [slug]);
+  return { ingredients, steps, ok }
+}
 
+function Recipe() {
+  const { slug } = useParams();
+  const [isCompactMode, setCompactMode] = useState(false);
+
+  const { steps, ingredients, ok } = useRecipe(slug);
+
+  if(!ok) {
+    return <NotFound/>
+  }
+
+  if(!ingredients || !steps) return null
+  
   return (
     <>
       <div className="flex gap-4">

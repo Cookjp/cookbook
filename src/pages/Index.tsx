@@ -15,7 +15,6 @@ const Index = () => {
 
   useEffect(() => {
     fetchIndex().then((recipeJson) => {
-      console.log(recipeJson);
       setRecipes(recipeJson);
     });
   }, []);
