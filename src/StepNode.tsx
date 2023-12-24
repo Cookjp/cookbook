@@ -36,7 +36,8 @@ export default class StepNode {
   render(ingredients: string[], isCompactMode: boolean) {
     let compactData = this.data;
     ingredients.forEach((ingredient: string, idx: number) => {
-      compactData = compactData.replace(ingredient, idx.toString());
+      const regexPattern = new RegExp("(?<![a-zA-Z])" + ingredient + "(?![a-zA-Z])", "g");
+      compactData = compactData.replace(regexPattern, `${idx+1}`);
     });
 
     return (
@@ -52,7 +53,7 @@ export default class StepNode {
           </li>
         )}
         {this.children.length !== 0 && (
-          <ol className="list-decimal list-outside" start={0}>
+          <ol className="list-decimal list-outside" start={1}>
             {this.children.map((child) =>
               child.render(ingredients, isCompactMode)
             )}
