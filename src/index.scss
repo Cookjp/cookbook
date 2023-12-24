@@ -2,6 +2,6 @@
 
 @for $i from 1 through 3 {
   .li-indent-#{$i} {
-      margin-left: #{$i*10}px;
+    margin-left: #{$i * 15}px;
   }
 }

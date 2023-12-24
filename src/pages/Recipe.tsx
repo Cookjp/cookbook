@@ -33,24 +33,32 @@ function Recipe() {
 
   return (
     <>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-      <button
-        onClick={() => {
-          setCompactMode(!isCompactMode);
-        }}
-      >
-        Compact Mode
-      </button>
-      <h4 className="font-bold text-4xl mt-6 mb-2">Ingredients</h4>
-      <ol start={0} className="list-decimal list-outside">
-        {ingredients.map((ingredient) => {
-          return <li key={ingredient}>{ingredient}</li>;
-        })}
-      </ol>
-      <h4 className="font-bold text-4xl mt-12 mb-2">Steps</h4>
-      <ol>{steps?.render(ingredients, isCompactMode)}</ol>
+      <div className="flex gap-4">
+        <Link to="/">
+          <button>Home</button>
+        </Link>
+        <button
+          onClick={() => {
+            setCompactMode(!isCompactMode);
+          }}
+        >
+          Compact Mode
+        </button>
+      </div>
+      <div className="md:flex gap-24 flex-wrap">
+        <div className="block">
+          <h4 className="font-bold text-4xl mt-6 mb-2">Ingredients</h4>
+          <ol start={1} className="list-decimal list-outside ml-4">
+            {ingredients.map((ingredient) => {
+              return <li key={ingredient}>{ingredient}</li>;
+            })}
+          </ol>
+        </div>
+        <div className="block">
+          <h4 className="font-bold text-4xl mt-12 md:mt-6 mb-2">Steps</h4>
+          <ol className="ml-5">{steps?.render(ingredients, isCompactMode)}</ol>
+        </div>
+      </div>
     </>
   );
 }
