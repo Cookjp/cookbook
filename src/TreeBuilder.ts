@@ -1,37 +1,39 @@
 import StepNode from "./StepNode";
+import repo from "./repo";
+import { Step } from "./types/Recipe";
 
-async function fetchJsonFile(filePath: string) {
-  return fetch(filePath, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  }).then((response) => {
-    if(response.status === 200)  {
-      return response.json()
-    }
-    else return response
-  })
-  .catch(() => { return{status: 400}});
+type TreeError = {
+  status: "Error"
 }
 
-function addChildren(node: StepNode, children: any[], depth: number): void {
+type TreeSuccess = {
+  status: "Success"
+  ingredients: string[]
+  stepTree: StepNode
+}
+
+type RecipeTree = TreeError | TreeSuccess
+
+function addChildren(node: StepNode, children: Step[] | undefined, depth: number): void {
   if (children) {
     for (const child of children) {
-      const childNode = new StepNode(child["label"], depth + 1);
+      const childNode = new StepNode(child.label, depth + 1);
       node.addChild(childNode);
-      addChildren(childNode, child["children"], depth + 1);
+      addChildren(childNode, child.children, depth + 1);
     }
   }
 }
 
-async function buildStepTreeFromFile(filename: string) {
-  const json = await fetchJsonFile(filename + ".json");
-  const status = json["status"]
-  const ingredients = json["ingredients"];
+async function buildStepTreeFromFile(filename: string): Promise<RecipeTree> {
+  const result = await repo.fetchRecipe(filename);
+  if(result.status === 'Error') {
+    return { status: "Error" }
+  }
+  const { ingredients, steps } = result.recipe
+
   const rootNode = new StepNode("root", 0);
-  addChildren(rootNode, json["steps"], 0);
-  return { status, ingredients, stepTree: rootNode };
+  addChildren(rootNode, steps, 0);
+  return { status: "Success", ingredients, stepTree: rootNode };
 }
 
 export default buildStepTreeFromFile;

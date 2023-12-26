@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { kv } from "@vercel/kv";
 
 async function fetchIndex(): Promise<string[]> {
-  return fetch("recipe/index.json", {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  }).then((response) => response.json());
+  return kv.scan(0).then((res) => {
+    return res[1]
+  })
 }
 
 const Index = () => {

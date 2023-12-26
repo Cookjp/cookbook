@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import StepNode from "../StepNode";
 import load from "../TreeBuilder";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Step } from "../components/Step";
 import NotFound from "./NotFound";
 
 
 const useRecipe = (slug :string | undefined) => {
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [steps, setSteps] = useState<StepNode>();
-  const [ok, setOK] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if(!slug) return 
     load(slug).then((result) => {
-      if(result.status === 404) {
-        setOK(false)
+      if(result.status === "Error") {
+        setError(true)
         return 
       }
       setSteps(result.stepTree);
@@ -34,16 +34,16 @@ const useRecipe = (slug :string | undefined) => {
 
     });
   }, [slug]);
-  return { ingredients, steps, ok }
+  return { ingredients, steps, error }
 }
 
 function Recipe() {
   const { slug } = useParams();
   const [isCompactMode, setCompactMode] = useState(false);
 
-  const { steps, ingredients, ok } = useRecipe(slug);
+  const { steps, ingredients, error } = useRecipe(slug);
 
-  if(!ok) {
+  if(error) {
     return <NotFound/>
   }
 

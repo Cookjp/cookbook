@@ -1,3 +1,7 @@
+# Customisable Cookbook
+
+Recipes are stored on [vercel KV](https://vercel.com/docs/storage/vercel-kv) (Redis Storage) in json format like this. see type [Recipe](./src/types/Recipe.d.ts) 
+```
 {
   "ingredients": [
     "pasta",
@@ -36,3 +40,7 @@
     }
   ]
 }
+```
+
+Uploaded with redis cli:
+`redis-cli --tls -u redis://******:*****@creative-mite-33542.kv.vercel-storage.com:33542 -x SET mattar-paneer < ./public/recipe/mattar-paneer.json`

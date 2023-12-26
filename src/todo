@@ -4,12 +4,17 @@
 // add index page ✅
 // add back button ✅
 // deploy ✅
+// make an input form (involves saving json files somewhere... vercel KV? https://vercel.com/docs/storage/vercel-kv/quickstart) 
+    // store recipes on vercel-kv ✅
+    // Create an input form that creates JSON structure
+    // Upload behind authentication (Supabase?)
 // transition on dropdown
-// implement something to do with skippable steps and ingredients like step 1 in carbonara
 // add other recipes
-// make it look pretty
 // handle links e.g. garlic mushrooms in ramen
+
+FEATURE IDEAS
+// implement something to do with skippable steps and ingredients like step 1 in carbonara
 // add some sort of search based on ingredients (what's in my fridge sort of thing)
-// Flow feature? I.e. circles for prep. diamond for cooking. can things happen simulatenously? top line is tasks. drop down of items describing ongoing events
+// CC: Flow feature? I.e. circles for prep. diamond for cooking. can things happen simulatenously? top line is tasks. drop down of items describing ongoing events
 // button to list ingredients next to each step
-// 
+// Select a group of recipes. make a shopping list.
