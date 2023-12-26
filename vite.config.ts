@@ -4,13 +4,10 @@ import fs from "vite-plugin-fs";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {  
-  
   const env = loadEnv(mode, process.cwd(), '');
   return {
     define: {
       'process.env': env,
-      'process.env.UPSTASH_DISABLE_TELEMETRY': '1',
-      _global: ({}),
     },
     plugins: [
       react({
