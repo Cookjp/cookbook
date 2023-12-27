@@ -7,9 +7,8 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
     define: {
-      "typeof process !== 'undefined'": "true",
-      "process.env": env
-    },
+      _global: ({})
+  },
     plugins: [
       react({
         include: "**/*.tsx",
