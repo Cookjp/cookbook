@@ -1,5 +1,5 @@
 import StepNode from "./StepNode";
-import repo from "./repo";
+import repo from "./api/repo";
 import { Step } from "./types/Recipe";
 
 type TreeError = {

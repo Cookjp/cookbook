@@ -4,11 +4,14 @@ import fs from "vite-plugin-fs";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
+  const define = {};
+  if (mode === "development") {
+    const env = loadEnv(mode, process.cwd(), "");
+    define["process.env"] = env;
+  }
+
   return {
-    define: {
-      _global: ({})
-  },
+    define,
     plugins: [
       react({
         include: "**/*.tsx",

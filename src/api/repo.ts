@@ -1,5 +1,5 @@
-import { kv } from "@vercel/kv";
-import { Recipe } from "./types/Recipe";
+import { Recipe } from "../types/Recipe";
+import client from "./client";
 
 type Error = {
   status: "Error";
@@ -16,7 +16,7 @@ const ERROR: Error = { status: "Error" };
 
 const fetchRecipe = (filename: string): Promise<RecipeRes> => {
   return (
-    kv
+    client
       .get<Recipe>(filename)
       .then((response) => {
         if (!response) {

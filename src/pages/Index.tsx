@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { kv } from "@vercel/kv";
+import client from "../api/client";
 
 async function fetchIndex(): Promise<string[]> {
-  return kv.scan(0).then((res) => {
+  return client.scan(0).then((res) => {
     return res[1];
   });
 }
