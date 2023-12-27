@@ -62,19 +62,19 @@ button:hover {
 }
 
 .dropdown {
-  border-width: 2px; 
-  border-color: #000000; 
-  width: 3rem; 
+  border-width: 2px;
+  border-color: #000000;
+  width: 3rem;
   height: 2rem;
   font-size: 20px;
   justify-content: center;
   font-weight: 700;
-  margin: 5px 5px 5px 5px
+  margin: 5px 5px 5px 5px;
 }
 
 .accordion {
-  border-width: 2px; 
-  border-color: #000000; 
+  border-width: 2px;
+  border-color: #000000;
   border-radius: 8px;
   margin: 5px 5px 10px 5px;
   padding: 10px 5px 10px 5px;

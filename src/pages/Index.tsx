@@ -4,8 +4,8 @@ import { kv } from "@vercel/kv";
 
 async function fetchIndex(): Promise<string[]> {
   return kv.scan(0).then((res) => {
-    return res[1]
-  })
+    return res[1];
+  });
 }
 
 const Index = () => {

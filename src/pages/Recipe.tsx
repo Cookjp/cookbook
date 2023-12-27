@@ -6,18 +6,17 @@ import { Link } from "react-router-dom";
 import { Step } from "../components/Step";
 import NotFound from "./NotFound";
 
-
-const useRecipe = (slug :string | undefined) => {
+const useRecipe = (slug: string | undefined) => {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [steps, setSteps] = useState<StepNode>();
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    if(!slug) return 
+    if (!slug) return;
     load(slug).then((result) => {
-      if(result.status === "Error") {
-        setError(true)
-        return 
+      if (result.status === "Error") {
+        setError(true);
+        return;
       }
       setSteps(result.stepTree);
 
@@ -31,11 +30,10 @@ const useRecipe = (slug :string | undefined) => {
       });
 
       setIngredients(sorted);
-
     });
   }, [slug]);
-  return { ingredients, steps, error }
-}
+  return { ingredients, steps, error };
+};
 
 function Recipe() {
   const { slug } = useParams();
@@ -43,12 +41,12 @@ function Recipe() {
 
   const { steps, ingredients, error } = useRecipe(slug);
 
-  if(error) {
-    return <NotFound/>
+  if (error) {
+    return <NotFound />;
   }
 
-  if(!ingredients || !steps) return null
-  
+  if (!ingredients || !steps) return null;
+
   return (
     <>
       <div className="mb-4">
@@ -79,7 +77,15 @@ function Recipe() {
         {/* Recipe steps list */}
         <div className="block">
           <h4 className="font-bold text-4xl mt-12 md:mt-6 mb-2">Steps</h4>
-          {steps && <div className="ml-5"><Step node={steps} ingredients={ingredients} isCompactMode={isCompactMode}/> </div>}
+          {steps && (
+            <div className="ml-5">
+              <Step
+                node={steps}
+                ingredients={ingredients}
+                isCompactMode={isCompactMode}
+              />{" "}
+            </div>
+          )}
         </div>
       </div>
     </>

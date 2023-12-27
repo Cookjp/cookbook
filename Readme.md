@@ -1,6 +1,7 @@
 # Customisable Cookbook
 
-Recipes are stored on [vercel KV](https://vercel.com/docs/storage/vercel-kv) (Redis Storage) in json format like this. see type [Recipe](./src/types/Recipe.d.ts) 
+Recipes are stored on [vercel KV](https://vercel.com/docs/storage/vercel-kv) (Redis Storage) in json format like this. see type [Recipe](./src/types/Recipe.d.ts)
+
 ```
 {
   "ingredients": [

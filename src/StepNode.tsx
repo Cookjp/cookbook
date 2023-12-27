@@ -1,5 +1,5 @@
 // Tree node used to construct a recipe tree
-// components/Step.tsx can render this 
+// components/Step.tsx can render this
 
 export default class StepNode {
   data: string;
