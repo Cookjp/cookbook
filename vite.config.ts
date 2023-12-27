@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   return {
     define: {
       "typeof process !== 'undefined'": "true",
+      "process.env": env
     },
     plugins: [
       react({
