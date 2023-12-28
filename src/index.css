@@ -27,10 +27,9 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+.content {
   margin-left: 10%;
   margin-top: 5%;
-  display: flex;
   min-width: 300px;
   min-height: 100vh;
 }
