@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import client from "../api/client";
+import repo from "../api/repo";
 
 async function fetchIndex(): Promise<string[]> {
-  return client.scan().then((res) => res);
+  return repo.fetchIndex();
 }
 
 const Index = () => {

@@ -7,7 +7,7 @@
 // make an input form (involves saving json files somewhere... vercel KV? https://vercel.com/docs/storage/vercel-kv/quickstart) 
     // store recipes on vercel-kv ✅
     // Create an input form that creates JSON structure
-    // Upload behind authentication (Supabase?)
+    // Upload behind authentication (Supabase?) https://supabase.com/docs/reference/javascript/auth-signinwithpassword https://supabase.com/dashboard/project/lthkzpqbqxtsbvogxqyh/auth/users
 // transition on dropdown
 // add other recipes
 // handle links e.g. garlic mushrooms in ramen

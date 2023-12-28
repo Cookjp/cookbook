@@ -32,4 +32,8 @@ const fetchRecipe = (filename: string): Promise<RecipeRes> => {
   );
 };
 
-export default { fetchRecipe };
+const fetchIndex = () => {
+  return client.scan().then((res) => res);
+};
+
+export default { fetchRecipe, fetchIndex };

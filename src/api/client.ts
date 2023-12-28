@@ -2,12 +2,16 @@ interface KVResponse<T> {
   result: T;
 }
 
+type GetRes = KVResponse<string>;
+
 const get = <T>(key: string): Promise<T> => {
   return fetch(`https://creative-mite-33542.kv.vercel-storage.com/get/${key}`, {
     headers: {
       Authorization: `Bearer ${import.meta.env.VITE_KV_REST_API_TOKEN}`,
     },
-  }).then((response) => response.json());
+  }).then((response) =>
+    (response.json() as Promise<GetRes>).then((kv) => JSON.parse(kv.result))
+  );
 };
 
 type ScanRes = KVResponse<[string, string[]]>;
@@ -17,7 +21,7 @@ const scan = (): Promise<string[]> => {
     headers: {
       Authorization: `Bearer ${import.meta.env.VITE_KV_REST_API_TOKEN}`,
     },
-  }).then((response: Response) =>
+  }).then((response) =>
     (response.json() as Promise<ScanRes>).then((kv) => kv.result[1])
   );
 };
