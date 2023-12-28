@@ -12,7 +12,7 @@ const Header: React.FC = () => {
       </Link>
       {user && (
         <div className="flex items-center">
-          <p className="mr-2">Welcome, {user.email}!</p>
+          <p className="mr-2 md:text-l text-xs">Welcome, {user.email}!</p>
           <button
             className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
             onClick={logout}
