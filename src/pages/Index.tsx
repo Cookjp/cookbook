@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import client from "../api/client";
 
 async function fetchIndex(): Promise<string[]> {
-  return client.scan(0).then((res) => {
-    return res[1];
-  });
+  return client.scan().then((res) => res);
 }
 
 const Index = () => {
