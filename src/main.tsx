@@ -13,6 +13,7 @@ import { AuthProvider } from "./admin/AuthProvider";
 import LoginForm from "./admin/Login";
 import Layout from "./Layout";
 import NotFound from "./pages/NotFound";
+import Admin from "./admin/Admin";
 
 const routes: RouteObject[] = [
   {
@@ -29,6 +30,10 @@ const routes: RouteObject[] = [
       {
         path: "/login",
         element: <LoginForm />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
     ],
     errorElement: (

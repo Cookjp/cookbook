@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "./AuthProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -7,11 +7,19 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const nav = useNavigate();
-  const { login } = useAuth();
+  const { login, user, loading } = useAuth();
 
   const onSuccess = () => {
-    nav("/");
+    nav("/admin");
   };
+
+  // if user is authenticated, redirect to Admin page
+  useEffect(() => {
+    if (user && !loading) {
+      nav("/admin");
+    }
+  }, [user, loading]);
+
   const handleLogin = () => {
     if (email && password) {
       login(email, password).then(onSuccess);

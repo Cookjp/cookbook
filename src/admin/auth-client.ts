@@ -29,7 +29,7 @@ const signIn: SignIn = async (
 };
 
 type SignOut = () => Promise<void>;
-const signOut = async () => {
+const signOut: SignOut = async () => {
   await supabase.auth.signOut();
 };
 
@@ -41,6 +41,8 @@ const handleEvent = (
   if (event === "INITIAL_SESSION") {
     if (email) {
       setUser({ email });
+    } else {
+      setUser(null);
     }
   } else if (event === "SIGNED_IN") {
     if (email) {
