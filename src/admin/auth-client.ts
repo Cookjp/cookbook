@@ -61,7 +61,6 @@ const handleEvent = (
 
 const subscribe = (setUser: (user: User | null) => void) => {
   supabase.auth.onAuthStateChange(async (event) => {
-    console.log("authChange", event);
     supabase.auth
       .getSession()
       .then((res) => {
