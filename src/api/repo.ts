@@ -32,8 +32,13 @@ const fetchRecipe = (filename: string): Promise<RecipeRes> => {
   );
 };
 
+const setRecipe = (name: string, recipe: Recipe) => {
+  const key = name.replace(/ /g, "-").toLowerCase();
+  return client.set<Recipe>(key, recipe);
+};
+
 const fetchIndex = () => {
   return client.scan().then((res) => res);
 };
 
-export default { fetchRecipe, fetchIndex };
+export default { fetchRecipe, setRecipe, fetchIndex };

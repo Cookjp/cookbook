@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { Recipe, Step } from "../types/Recipe";
 import StepInput from "./components/StepInput";
+import repo from "../api/repo";
 
 const RecipeForm = () => {
+  const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState<string[]>([""]);
   const [steps, setSteps] = useState<Step[]>([{ label: "", skippable: false }]);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setName(value);
+  };
 
   const handleIngredientChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -17,6 +24,12 @@ const RecipeForm = () => {
 
   const addIngredient = () => {
     setIngredients([...ingredients, ""]);
+  };
+
+  const removeIngredient = (idx: number) => {
+    setIngredients((oldIngredients) => {
+      return oldIngredients.filter((_, i) => i !== idx);
+    });
   };
 
   const amendStep = (
@@ -64,7 +77,9 @@ const RecipeForm = () => {
 
   const handleSubmit = () => {
     const recipe: Recipe = { ingredients, steps };
-    console.log(recipe);
+    repo.setRecipe(name, recipe).then((msg) => {
+      alert(msg);
+    });
   };
 
   const removeStep = (idx: number) => {
@@ -76,19 +91,35 @@ const RecipeForm = () => {
   return (
     <div className="m-8 p-4 border rounded shadow">
       <h2 className="text-2xl font-semibold mb-4">Recipe Form</h2>
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-600">Name</label>
+        <input
+          type="text"
+          value={name}
+          onChange={handleNameChange}
+          className="w-full mt-2 p-2 border rounded"
+        />
+      </div>
 
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-600">
           Ingredients
         </label>
         {ingredients.map((ingredient, index) => (
-          <input
-            key={index}
-            type="text"
-            value={ingredient}
-            onChange={(e) => handleIngredientChange(e, index)}
-            className="w-full mt-2 p-2 border rounded"
-          />
+          <div key={index}>
+            <input
+              type="text"
+              value={ingredient}
+              onChange={(e) => handleIngredientChange(e, index)}
+              className="w-full mt-2 p-2 border rounded"
+            />
+            <button
+              className="p-1 text-xs text-white rounded"
+              onClick={() => removeIngredient(index)}
+            >
+              Remove
+            </button>
+          </div>
         ))}
         <button
           className="p-1 text-xs text-white rounded"
