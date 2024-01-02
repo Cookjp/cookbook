@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StepNode from "../StepNode";
 
 interface Props {
@@ -9,12 +9,20 @@ interface Props {
 
 export const Step = ({ node, ingredients, isCompactMode }: Props) => {
   const [show, setShow] = useState(true);
-
   let compactData = node.data;
   ingredients.forEach((ingredient: string, idx: number) => {
     const regexPattern = new RegExp("\\b" + ingredient + "\\b", "g");
     compactData = compactData.replace(regexPattern, `${idx + 1}`);
   });
+
+  useEffect(() => {
+    if (isCompactMode) {
+      setShow(false);
+    }
+    if (!isCompactMode) {
+      setShow(true);
+    }
+  }, [isCompactMode]);
 
   const isRoot = node.depth === 0;
   const hasChildren = node.children.length !== 0;
@@ -35,7 +43,7 @@ export const Step = ({ node, ingredients, isCompactMode }: Props) => {
         {hasChildren && (
           <ol
             className={`list-decimal list-inside ${
-              show ? "" : "opacity-0 h-0"
+              show || isRoot ? "" : "opacity-0 h-0"
             }`}
             start={1}
           >
