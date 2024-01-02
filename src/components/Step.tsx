@@ -12,10 +12,7 @@ export const Step = ({ node, ingredients, isCompactMode }: Props) => {
 
   let compactData = node.data;
   ingredients.forEach((ingredient: string, idx: number) => {
-    const regexPattern = new RegExp(
-      "(?<![a-zA-Z])" + ingredient + "(?![a-zA-Z])",
-      "g"
-    );
+    const regexPattern = new RegExp("\\b" + ingredient + "\\b", "g");
     compactData = compactData.replace(regexPattern, `${idx + 1}`);
   });
 
