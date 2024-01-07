@@ -36,7 +36,7 @@ const ActionDrawerWrapper = ({selectedRecipes}: ActionDrawerWrapperProps) => {
     const generateShoppingList = async () => {
         const promises: Promise<RecipeRes>[] = [];
         selectedRecipes.forEach(async (slug) => {
-            const promise = repo.fetchRecipe("recipe/" + slug);
+            const promise = repo.fetchRecipe(slug);
             promises.push(promise)
         })
         const result = (await Promise.all(promises)).map((res) => {
