@@ -10,7 +10,7 @@ type RecipeSuccess = {
   recipe: RecipeDTO;
 };
 
-type RecipeRes = RecipeSuccess | Error;
+export type RecipeRes = RecipeSuccess | Error;
 
 const ERROR: Error = { status: "Error" };
 

@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   const { user, logout } = useAuth();
 
   return (
-    <header className="bg-gray-800 p-4 text-white flex justify-between items-center">
+    <header className="z-10 relative bg-gray-800 p-4 text-white flex justify-between items-center">
       <Link to={"/"}>
         <h1 className="text-2xl font-bold">Cookbook</h1>
       </Link>
