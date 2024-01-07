@@ -1,10 +1,10 @@
 import React from "react";
-import { Step } from "../../types/Recipe";
+import { StepDTO } from "../../api/types/Recipe";
 
 interface StepProps {
-  step: Step;
+  step: StepDTO;
   id: string;
-  parentChange: (step: Step, id: string) => void;
+  parentChange: (step: StepDTO, id: string) => void;
   handleSkippableChange: (index: number) => void;
 }
 
@@ -14,7 +14,7 @@ const StepInput = ({
   parentChange,
   handleSkippableChange,
 }: StepProps) => {
-  const handlChildStepChange = (newStep: Step, id: string) => {
+  const handlChildStepChange = (newStep: StepDTO, id: string) => {
     parentChange(newStep, id);
   };
 
