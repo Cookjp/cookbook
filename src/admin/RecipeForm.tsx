@@ -1,12 +1,28 @@
-import React, { useState } from "react";
-import { Recipe, Step } from "../types/Recipe";
+import React, { useEffect, useState } from "react";
 import StepInput from "./components/StepInput";
 import repo from "../api/repo";
+import { RecipeDTO, StepDTO } from "../api/types/Recipe";
 
-const RecipeForm = () => {
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState<string[]>([""]);
-  const [steps, setSteps] = useState<Step[]>([{ label: "", skippable: false }]);
+
+interface RecipeFormProps {
+  recipe: RecipeDTO
+  slug?: string
+}
+
+const RecipeForm = ({recipe, slug}: RecipeFormProps) => {
+  const [name, setName] = useState(slug);
+  const [ingredients, setIngredients] = useState<string[]>(recipe.ingredients);
+  const [steps, setSteps] = useState<StepDTO[]>(
+    recipe.steps || [
+    { label: "", skippable: false },
+  ]);
+
+  useEffect(() => {
+    if (recipe) {
+      setIngredients(recipe.ingredients);
+      setSteps(recipe.steps)
+    }
+  }, [recipe])  
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -33,10 +49,10 @@ const RecipeForm = () => {
   };
 
   const amendStep = (
-    newStep: Step,
+    newStep: StepDTO,
     idArray: number[],
-    currentStep: Step
-  ): Step => {
+    currentStep: StepDTO
+  ): StepDTO => {
     const index = idArray[0];
     if (idArray.length === 0) {
       return newStep;
@@ -51,7 +67,7 @@ const RecipeForm = () => {
     return { ...currentStep, children: newChildren };
   };
 
-  const handleStepChange = (newStep: Step, id: string) => {
+  const handleStepChange = (newStep: StepDTO, id: string) => {
     const idArray = id.split(".").map(parseFloat);
     const first = idArray[0];
     idArray.shift();
@@ -76,7 +92,11 @@ const RecipeForm = () => {
   };
 
   const handleSubmit = () => {
-    const recipe: Recipe = { ingredients, steps };
+    const recipe: RecipeDTO = { ingredients, steps };
+    if(!name) {
+      alert("name must be set")
+      return
+    }
     repo.setRecipe(name, recipe).then((msg) => {
       alert(msg);
     });

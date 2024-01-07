@@ -1,6 +1,6 @@
-import StepNode from "./StepNode";
-import repo from "./api/repo";
-import { Step } from "./types/Recipe";
+import StepNode from "../StepNode";
+import repo from "./repo";
+import { StepDTO } from "./types/Recipe";
 
 type TreeError = {
   status: "Error";
@@ -16,7 +16,7 @@ type RecipeTree = TreeError | TreeSuccess;
 
 function addChildren(
   node: StepNode,
-  children: Step[] | undefined,
+  children: StepDTO[] | undefined,
   depth: number
 ): void {
   if (children) {

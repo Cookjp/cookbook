@@ -1,6 +1,8 @@
 // Tree node used to construct a recipe tree
 // components/Step.tsx can render this
 
+import { RecipeDTO, StepDTO } from "./api/types/Recipe";
+
 export default class StepNode {
   data: string;
   children: StepNode[];
@@ -23,5 +25,24 @@ export default class StepNode {
     return [data]
       .concat(this.children.flatMap((child) => child.traverse()))
       .flatMap((f) => (f ? [f] : [])); // removes nulls and is type safe
+  }
+
+  toDTO(): StepDTO[] {
+    return this.children.map((child) => this.transformStepNodeToDTO(child));
+  }
+
+  private transformStepNodeToDTO(node: StepNode): StepDTO {
+    const stepDTO: StepDTO = {
+      label: node.data,
+      children: node.children.map((child) =>
+        this.transformStepNodeToDTO(child)
+      ),
+    };
+
+    if (node.depth === 0) {
+      stepDTO.skippable = true;
+    }
+
+    return stepDTO;
   }
 }

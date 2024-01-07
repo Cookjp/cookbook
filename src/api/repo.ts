@@ -1,4 +1,4 @@
-import { Recipe } from "../types/Recipe";
+import { RecipeDTO } from "./types/Recipe";
 import client from "./client";
 
 type Error = {
@@ -7,7 +7,7 @@ type Error = {
 
 type RecipeSuccess = {
   status: "Success";
-  recipe: Recipe;
+  recipe: RecipeDTO;
 };
 
 type RecipeRes = RecipeSuccess | Error;
@@ -17,7 +17,7 @@ const ERROR: Error = { status: "Error" };
 const fetchRecipe = (filename: string): Promise<RecipeRes> => {
   return (
     client
-      .get<Recipe>(filename)
+      .get<RecipeDTO>(filename)
       .then((response) => {
         if (!response) {
           return ERROR;
@@ -32,9 +32,9 @@ const fetchRecipe = (filename: string): Promise<RecipeRes> => {
   );
 };
 
-const setRecipe = (name: string, recipe: Recipe) => {
+const setRecipe = (name: string, recipe: RecipeDTO) => {
   const key = name.replace(/ /g, "-").toLowerCase();
-  return client.set<Recipe>(key, recipe);
+  return client.set<RecipeDTO>(key, recipe);
 };
 
 const fetchIndex = () => {

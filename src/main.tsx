@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
-  redirect,
   RouteObject,
   RouterProvider,
 } from "react-router-dom";
@@ -33,6 +32,10 @@ const routes: RouteObject[] = [
       },
       {
         path: "/admin",
+        element: <Admin />,
+      },
+      {
+        path: "/admin/recipe/:slug",
         element: <Admin />,
       },
     ],
