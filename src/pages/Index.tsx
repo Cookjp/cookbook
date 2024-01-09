@@ -9,7 +9,9 @@ async function fetchIndex(): Promise<string[]> {
 
 const Index = () => {
   const [recipes, setRecipes] = useState<string[]>([]);
-  const [selectedRecipes, setSelectedRecipes] = useState<Set<string>>(new Set());
+  const [selectedRecipes, setSelectedRecipes] = useState<Set<string>>(
+    new Set()
+  );
 
   useEffect(() => {
     fetchIndex().then((recipeJson) => {
@@ -17,33 +19,38 @@ const Index = () => {
     });
   }, []);
 
-    const handleSelection = (event: ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target;
-      const newSelectedRecipes = new Set(selectedRecipes)
-      if(newSelectedRecipes.has(value)) {
-        newSelectedRecipes.delete(value)
-      } else {
-        newSelectedRecipes.add(value);
-      }
-      setSelectedRecipes(newSelectedRecipes)
+  const handleSelection = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const newSelectedRecipes = new Set(selectedRecipes);
+    if (newSelectedRecipes.has(value)) {
+      newSelectedRecipes.delete(value);
+    } else {
+      newSelectedRecipes.add(value);
     }
-  
-  
+    setSelectedRecipes(newSelectedRecipes);
+  };
+
   return (
     <div>
-    <div className="flex gap-4 flex-wrap">
-      {recipes.map((recipe) => (
-        <div className="flex gap-4" key={recipe}>
-        <Link  to={`/recipe/${recipe}`}>
-          <button className="nav">{recipe.replaceAll("-", " ")}</button>
-        </Link>
-          <label htmlFor={recipe} className="flex gap-12">
-          <input type="checkbox" id={recipe} value={recipe} checked={selectedRecipes.has(recipe)} onChange={handleSelection} />
-        </label>
-        </div>
-      ))}
-    </div>
-    <ActionDrawer selectedRecipes={selectedRecipes} />
+      <div className="flex gap-4 flex-wrap">
+        {recipes.map((recipe) => (
+          <div className="flex gap-4" key={recipe}>
+            <Link to={`/recipe/${recipe}`}>
+              <button className="nav">{recipe.replaceAll("-", " ")}</button>
+            </Link>
+            <label htmlFor={recipe} className="flex gap-12">
+              <input
+                type="checkbox"
+                id={recipe}
+                value={recipe}
+                checked={selectedRecipes.has(recipe)}
+                onChange={handleSelection}
+              />
+            </label>
+          </div>
+        ))}
+      </div>
+      <ActionDrawer selectedRecipes={selectedRecipes} />
     </div>
   );
 };

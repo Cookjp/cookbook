@@ -3,26 +3,24 @@ import StepInput from "./components/StepInput";
 import repo from "../api/repo";
 import { RecipeDTO, StepDTO } from "../api/types/Recipe";
 
-
 interface RecipeFormProps {
-  recipe: RecipeDTO
-  slug?: string
+  recipe: RecipeDTO;
+  slug?: string;
 }
 
-const RecipeForm = ({recipe, slug}: RecipeFormProps) => {
+const RecipeForm = ({ recipe, slug }: RecipeFormProps) => {
   const [name, setName] = useState(slug);
   const [ingredients, setIngredients] = useState<string[]>(recipe.ingredients);
   const [steps, setSteps] = useState<StepDTO[]>(
-    recipe.steps || [
-    { label: "", skippable: false },
-  ]);
+    recipe.steps || [{ label: "", skippable: false }]
+  );
 
   useEffect(() => {
     if (recipe) {
       setIngredients(recipe.ingredients);
-      setSteps(recipe.steps)
+      setSteps(recipe.steps);
     }
-  }, [recipe])  
+  }, [recipe]);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -93,9 +91,9 @@ const RecipeForm = ({recipe, slug}: RecipeFormProps) => {
 
   const handleSubmit = () => {
     const recipe: RecipeDTO = { ingredients, steps };
-    if(!name) {
-      alert("name must be set")
-      return
+    if (!name) {
+      alert("name must be set");
+      return;
     }
     repo.setRecipe(name, recipe).then((msg) => {
       alert(msg);

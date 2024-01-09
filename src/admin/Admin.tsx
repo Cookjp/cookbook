@@ -13,13 +13,13 @@ const Admin = () => {
   const fetchedRecipe = useRecipe(slug);
 
   // should have made RecipeForm accept a StepNode instead of a list of steps
-  // then this `toDTO()` method wouldn't be needed 
+  // then this `toDTO()` method wouldn't be needed
   // I can't be bothered to sort this out as it means reworking the whole form.
   const steps = fetchedRecipe.steps?.toDTO() || [];
 
   const recipe: RecipeDTO = {
     ingredients: fetchedRecipe.ingredients,
-    steps: steps
+    steps: steps,
   };
 
   // If user is not authenticated, redirect to login page
