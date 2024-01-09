@@ -18,6 +18,7 @@ const Admin = () => {
   const steps = fetchedRecipe.steps?.toDTO() || [];
 
   const recipe: RecipeDTO = {
+    name: fetchedRecipe.name,
     ingredients: fetchedRecipe.ingredients,
     steps: steps,
   };

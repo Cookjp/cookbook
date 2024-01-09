@@ -28,7 +28,7 @@ const useRecipe = (slug: string | undefined) => {
       setIngredients(sorted);
     });
   }, [slug]);
-  return { ingredients, steps, error };
+  return { ingredients, steps, error, name: slug || "" };
 };
 
 export default useRecipe;
