@@ -26,7 +26,7 @@ const fetchRecipe = (filename: string): Promise<RecipeRes> => {
             name: filename,
             ingredients: response.ingredients,
             steps: response.steps,
-          }
+          };
           return { status: "Success" as const, recipe };
         }
       })

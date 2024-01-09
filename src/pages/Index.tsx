@@ -38,7 +38,13 @@ const Index = () => {
         {recipes.map((recipe) => (
           <div className="flex gap-4" key={recipe}>
             {isSelectMode ? (
-              <button className={`nav ${selectedRecipes.has(recipe) ? 'border-2 border-blue-800' : ''}`} onClick={handleSelection} value={recipe}>
+              <button
+                className={`nav ${
+                  selectedRecipes.has(recipe) ? "border-2 border-blue-800" : ""
+                }`}
+                onClick={handleSelection}
+                value={recipe}
+              >
                 {recipe.replaceAll("-", " ")}
               </button>
             ) : (

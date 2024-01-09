@@ -47,7 +47,7 @@ const ActionDrawerWrapper = ({
     });
     const result = (await Promise.all(promises)).map((res) => {
       if (res.status == "Success") {
-        return {"name": res.recipe.name, "ingredients": res.recipe.ingredients};
+        return { name: res.recipe.name, ingredients: res.recipe.ingredients };
       } else {
         return ["could not generate"];
       }
