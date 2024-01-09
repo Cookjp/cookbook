@@ -13,13 +13,15 @@ const Index = () => {
     new Set()
   );
 
+  const [isSelectMode, setIsSelectMode] = useState(false);
+
   useEffect(() => {
     fetchIndex().then((recipeJson) => {
       setRecipes(recipeJson);
     });
   }, []);
 
-  const handleSelection = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSelection = (event: any) => {
     const { value } = event.target;
     const newSelectedRecipes = new Set(selectedRecipes);
     if (newSelectedRecipes.has(value)) {
@@ -35,10 +37,16 @@ const Index = () => {
       <div className="flex gap-4 flex-wrap">
         {recipes.map((recipe) => (
           <div className="flex gap-4" key={recipe}>
-            <Link to={`/recipe/${recipe}`}>
-              <button className="nav">{recipe.replaceAll("-", " ")}</button>
-            </Link>
-            <label htmlFor={recipe} className="flex gap-12">
+            {isSelectMode ? (
+              <button className={`nav ${selectedRecipes.has(recipe) ? 'border-2 border-blue-800' : ''}`} onClick={handleSelection} value={recipe}>
+                {recipe.replaceAll("-", " ")}
+              </button>
+            ) : (
+              <Link to={`/recipe/${recipe}`}>
+                <button className="nav">{recipe.replaceAll("-", " ")}</button>
+              </Link>
+            )}
+            {/* <label htmlFor={recipe} className="flex gap-12">
               <input
                 type="checkbox"
                 id={recipe}
@@ -46,11 +54,15 @@ const Index = () => {
                 checked={selectedRecipes.has(recipe)}
                 onChange={handleSelection}
               />
-            </label>
+            </label> */}
           </div>
         ))}
       </div>
-      <ActionDrawer selectedRecipes={selectedRecipes} />
+      <ActionDrawer
+        selectedRecipes={selectedRecipes}
+        setIsSelectMode={setIsSelectMode}
+        isSelectMode={isSelectMode}
+      />
     </div>
   );
 };

@@ -29,9 +29,15 @@ const ActionDrawer = ({ actions }: ActionDrawerProps) => {
 
 interface ActionDrawerWrapperProps {
   selectedRecipes: Set<string>;
+  setIsSelectMode: (isSelectMode: boolean) => void;
+  isSelectMode: boolean;
 }
 
-const ActionDrawerWrapper = ({ selectedRecipes }: ActionDrawerWrapperProps) => {
+const ActionDrawerWrapper = ({
+  selectedRecipes,
+  setIsSelectMode,
+  isSelectMode,
+}: ActionDrawerWrapperProps) => {
   const nav = useNavigate();
   const generateShoppingList = async () => {
     const promises: Promise<RecipeRes>[] = [];
@@ -49,11 +55,13 @@ const ActionDrawerWrapper = ({ selectedRecipes }: ActionDrawerWrapperProps) => {
     nav("/shopping-list?ingredients=" + result.join(","));
   };
 
-  return (
-    <ActionDrawer
-      actions={[{ label: "Generate List", onClick: generateShoppingList }]}
-    />
-  );
+  const actions = isSelectMode
+    ? [
+        { label: "Generate List", onClick: generateShoppingList },
+        { label: "Cancel", onClick: () => setIsSelectMode(false) },
+      ]
+    : [{ label: "Select Recipes", onClick: () => setIsSelectMode(true) }];
+  return <ActionDrawer actions={actions} />;
 };
 
 export default ActionDrawerWrapper;
