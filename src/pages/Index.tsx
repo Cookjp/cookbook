@@ -37,8 +37,8 @@ const Index = () => {
         <Link  to={`/recipe/${recipe}`}>
           <button className="nav">{recipe.replaceAll("-", " ")}</button>
         </Link>
-          <label htmlFor="select" className="flex gap-12">
-          <input type="checkbox" id="select" value={recipe} checked={selectedRecipes.has(recipe)} onChange={handleSelection} />
+          <label htmlFor={recipe} className="flex gap-12">
+          <input type="checkbox" id={recipe} value={recipe} checked={selectedRecipes.has(recipe)} onChange={handleSelection} />
         </label>
         </div>
       ))}
