@@ -22,7 +22,12 @@ const fetchRecipe = (filename: string): Promise<RecipeRes> => {
         if (!response) {
           return ERROR;
         } else {
-          return { status: "Success" as const, recipe: response };
+          const recipe: RecipeDTO = {
+            name: filename,
+            ingredients: response.ingredients,
+            steps: response.steps,
+          }
+          return { status: "Success" as const, recipe };
         }
       })
       // Not sure why, but this is not called when an error occurs in kv.get (problem in 3rd party?)

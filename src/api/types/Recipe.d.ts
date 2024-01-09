@@ -1,4 +1,5 @@
 export interface RecipeDTO {
+  name: string;
   ingredients: string[];
   steps: StepDTO[];
 }

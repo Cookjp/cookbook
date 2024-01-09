@@ -47,12 +47,12 @@ const ActionDrawerWrapper = ({
     });
     const result = (await Promise.all(promises)).map((res) => {
       if (res.status == "Success") {
-        return res.recipe.ingredients;
+        return {"name": res.recipe.name, "ingredients": res.recipe.ingredients};
       } else {
         return ["could not generate"];
       }
     });
-    nav("/shopping-list?ingredients=" + result.join(","));
+    nav("/shopping-list?recipes=" + JSON.stringify(result));
   };
 
   const actions = isSelectMode
