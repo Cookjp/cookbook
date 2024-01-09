@@ -32,7 +32,7 @@ interface ActionDrawerWrapperProps {
 }
 
 const ActionDrawerWrapper = ({selectedRecipes}: ActionDrawerWrapperProps) => {
-
+  const nav = useNavigate();
     const generateShoppingList = async () => {
         const promises: Promise<RecipeRes>[] = [];
         selectedRecipes.forEach(async (slug) => {
@@ -46,8 +46,8 @@ const ActionDrawerWrapper = ({selectedRecipes}: ActionDrawerWrapperProps) => {
                 return ["could not generate"]
             }
         })
-        alert(result)
-    }
+    nav("/shopping-list?ingredients=" + result.join(","));
+  };
 
     return <ActionDrawer actions={[{"label": "Generate List", onClick: generateShoppingList}]}/>
 }

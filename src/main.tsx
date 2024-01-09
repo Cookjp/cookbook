@@ -13,6 +13,7 @@ import LoginForm from "./admin/Login";
 import Layout from "./Layout";
 import NotFound from "./pages/NotFound";
 import Admin from "./admin/Admin";
+import ShoppingList from "./pages/ShoppingList";
 
 const routes: RouteObject[] = [
   {
@@ -25,6 +26,10 @@ const routes: RouteObject[] = [
       {
         path: "/recipe/:slug",
         element: <Recipe />,
+      },
+      {
+        path: "/shopping-list",
+        element: <ShoppingList />,
       },
       {
         path: "/login",
