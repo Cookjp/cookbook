@@ -90,11 +90,11 @@ const RecipeForm = ({ recipe, slug }: RecipeFormProps) => {
   };
 
   const handleSubmit = () => {
-    const recipe: RecipeDTO = { ingredients, steps };
     if (!name) {
       alert("name must be set");
       return;
     }
+    const recipe: RecipeDTO = { ingredients, steps, name };
     repo.setRecipe(name, recipe).then((msg) => {
       alert(msg);
     });
