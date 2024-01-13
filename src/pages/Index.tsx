@@ -34,13 +34,18 @@ const Index = () => {
 
   return (
     <div>
-      <div className="flex gap-4 flex-wrap">
+      <ActionDrawer
+        selectedRecipes={selectedRecipes}
+        setIsSelectMode={setIsSelectMode}
+        isSelectMode={isSelectMode}
+      />
+      <div className="mt-12 grid md:grid-cols-5 grid-cols-2 gap-4 px-4">
         {recipes.map((recipe) => (
-          <div className="flex gap-4" key={recipe}>
+          <div className="w-full" key={recipe}>
             {isSelectMode ? (
               <button
-                className={`nav ${
-                  selectedRecipes.has(recipe) ? "border-2 border-blue-800" : ""
+                className={`nav w-full ${
+                  selectedRecipes.has(recipe) ? "border-2 border-orange-500" : ""
                 }`}
                 onClick={handleSelection}
                 value={recipe}
@@ -48,8 +53,8 @@ const Index = () => {
                 {recipe.replaceAll("-", " ")}
               </button>
             ) : (
-              <Link to={`/recipe/${recipe}`}>
-                <button className="nav">{recipe.replaceAll("-", " ")}</button>
+              <Link className="w-full" to={`/recipe/${recipe}`}>
+                <button className="nav w-full min-h-[70px]">{recipe.replaceAll("-", " ")}</button>
               </Link>
             )}
             {/* <label htmlFor={recipe} className="flex gap-12">
@@ -64,11 +69,6 @@ const Index = () => {
           </div>
         ))}
       </div>
-      <ActionDrawer
-        selectedRecipes={selectedRecipes}
-        setIsSelectMode={setIsSelectMode}
-        isSelectMode={isSelectMode}
-      />
     </div>
   );
 };

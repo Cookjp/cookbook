@@ -28,8 +28,6 @@ a:hover {
 }
 
 .content {
-  margin-left: 10%;
-  margin-top: 5%;
   min-width: 300px;
   min-height: 100vh;
 }
@@ -54,10 +52,6 @@ button:hover {
 }
 .nav {
   padding: 0.6em 1.2em;
-}
-.nav:focus,
-.nav:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 .dropdown {
