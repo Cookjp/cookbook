@@ -18,7 +18,7 @@ function Recipe() {
   if (!ingredients || !steps) return null;
 
   return (
-    <>
+    <div className="md:p-12 p-6">
       <div className="mb-4">
         <Link to="/">
           <button className="nav">{`< Home`}</button>
@@ -58,7 +58,7 @@ function Recipe() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
